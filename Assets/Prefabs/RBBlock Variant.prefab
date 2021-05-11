@@ -1,26 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!50 &534877106
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5076535517234434205}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1001 &3892246094005762834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29,24 +8,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5656510925985338992, guid: 7c9ac8adbed5a69489fc89f771fa7166, type: 3}
-      propertyPath: spr
-      value: 
-      objectReference: {fileID: 21300000, guid: a6136ab119849c2428c70af3cee33a71, type: 3}
-    - target: {fileID: 5656510925985338992, guid: 7c9ac8adbed5a69489fc89f771fa7166, type: 3}
-      propertyPath: blockColor
-      value: blue
+      propertyPath: mats.Array.size
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5656510925985338992, guid: 7c9ac8adbed5a69489fc89f771fa7166, type: 3}
+      propertyPath: mats.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0d606ec57d9b7fd41976293a5201d4e1, type: 2}
+    - target: {fileID: 5656510925985338992, guid: 7c9ac8adbed5a69489fc89f771fa7166, type: 3}
+      propertyPath: mats.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 77d11a5372c26904da27eba48756a79a, type: 2}
+    - target: {fileID: 5656510925985338992, guid: 7c9ac8adbed5a69489fc89f771fa7166, type: 3}
+      propertyPath: mats.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 91ea03bba197afa459a2c646b04dc189, type: 2}
     - target: {fileID: 8104072615652813708, guid: 7c9ac8adbed5a69489fc89f771fa7166, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8104072615652813708, guid: 7c9ac8adbed5a69489fc89f771fa7166, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.82
+      value: 7.19
       objectReference: {fileID: 0}
     - target: {fileID: 8104072615652813708, guid: 7c9ac8adbed5a69489fc89f771fa7166, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.63
+      value: -1.46
       objectReference: {fileID: 0}
     - target: {fileID: 8104072615652813708, guid: 7c9ac8adbed5a69489fc89f771fa7166, type: 3}
       propertyPath: m_LocalPosition.z
@@ -82,12 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8104072615652813711, guid: 7c9ac8adbed5a69489fc89f771fa7166, type: 3}
       propertyPath: m_Name
-      value: RBBlock Variant
+      value: RBBlue1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c9ac8adbed5a69489fc89f771fa7166, type: 3}
---- !u!1 &5076535517234434205 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8104072615652813711, guid: 7c9ac8adbed5a69489fc89f771fa7166, type: 3}
-  m_PrefabInstance: {fileID: 3892246094005762834}
-  m_PrefabAsset: {fileID: 0}

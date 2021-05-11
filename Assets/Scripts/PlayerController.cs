@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public UIController uiController;
     public SceneController sceneController;
+    public BlockController blockController;
     public AudioController audioController;
     public List<Material> playerMaterials;
     public List<PhysicsMaterial2D> bounceMats;
@@ -29,30 +30,25 @@ public class PlayerController : MonoBehaviour
     public Camera mainCam;
     #endregion
 
-    void Awake()
+    void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
         meshRen = GetComponent<MeshRenderer>();
         col.sharedMaterial = bounceMats[0];
         rb2d.sharedMaterial = bounceMats[0];
-
-        //playerInputs = new InputControls();
-        //playerInputs.Player.Jump.performed += ctx => Jump();
-        //playerInputs.Player.ColorPick.performed += ctx => PickColor();
-        //playerInputs.Player.Settings.performed += ctx => uiController.OpenSettings();
     }
 
     private void Update()
     {
         Move();
         Jump();
+        PickColor();
     }
 
     public void Move()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
-        //float moveHorizontal = playerInputs.Player.Move.ReadValue<float>();
         Vector2 movement = new Vector2(moveHorizontal * moveSpeed * playerSpeedModifier * Time.deltaTime, 0);
         rb2d.AddForce(movement);
         if (rb2d.velocity.x != 0)
@@ -90,10 +86,13 @@ public class PlayerController : MonoBehaviour
 
     public void PickColor()
     {
-        if (colors.Count > 0)
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            uiController.OpenColorPicker();
-            DoSlowMo();
+            if (colors.Count > 0)
+            {
+                uiController.OpenColorPicker();
+                DoSlowMo();
+            }
         }
     }
 
@@ -106,19 +105,21 @@ public class PlayerController : MonoBehaviour
             SetPublicJumpModifier(1);
             SetPublicBounceModifier("normal");
         }
-        else if (color == "blue")
+
+        else if (color == "green")
         {
             meshRen.material = playerMaterials[1];
             SetPublicSpeedModifier(1);
-            SetPublicJumpModifier(1);
-            SetPublicBounceModifier("bouncy");
+            SetPublicJumpModifier(1.5f);
+            SetPublicBounceModifier("normal");
         }
-        else if (color == "green")
+
+        else if (color == "blue")
         {
             meshRen.material = playerMaterials[2];
             SetPublicSpeedModifier(1);
-            SetPublicJumpModifier(1.5f);
-            SetPublicBounceModifier("normal");
+            SetPublicJumpModifier(1);
+            SetPublicBounceModifier("bouncy");
         }
 
         else if (color == "default")
@@ -138,6 +139,7 @@ public class PlayerController : MonoBehaviour
     public void AddColor(string unlockedColor)
     {
         colors.Add(unlockedColor);
+        blockController.ChangeMaterialColors(unlockedColor);
         uiController.ShowButton(unlockedColor);
     }
 

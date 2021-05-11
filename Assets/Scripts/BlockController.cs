@@ -6,14 +6,48 @@ public class BlockController : MonoBehaviour
 {
     bool onScreen;
 
-    public Sprite spr;
     public string blockColor;
-
+    public List<Material> mats;
     public Camera mainCam;
 
     void Start()
     {
-        GetComponent<SpriteRenderer>().sprite = spr;
+        if (blockColor == "red")
+        {
+            GetComponent<MeshRenderer>().material = mats[0];
+        }
+        else if (blockColor == "green")
+        {
+            GetComponent<MeshRenderer>().material = mats[1];
+        }
+        else if (blockColor == "blue")
+        {
+            GetComponent<MeshRenderer>().material = mats[2];
+        }
+        else
+        {
+            Debug.Log("Can't apply correct material");
+        }
+    }
+
+    public void ChangeMaterialColors(string unlockedColor)
+    {
+        if (unlockedColor == "red")
+        {
+            mats[0].SetFloat("_gotRed", 1.0f);
+        }
+        else if (unlockedColor == "green")
+        {
+            mats[1].SetFloat("_gotGreen", 1.0f);
+        }
+        else if (unlockedColor == "blue")
+        {
+            mats[2].SetFloat("_gotBlue", 1.0f);
+        }
+        else
+        {
+            Debug.Log("Couldn't change color properties");
+        }
     }
 
     public void CheckScreenLocation()
