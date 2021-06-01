@@ -102,7 +102,7 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _gotBlue: 0
+    - _gotBlue: 1
     - _gotGreen: 0
     - _gotRed: 0
     m_Colors:

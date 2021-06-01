@@ -23,7 +23,6 @@ public class UIController : MonoBehaviour
 
     public void SetColor(string color)
     {
-        Debug.Log("SetColor called");
         sceneController.SetCurrentColor(color);
         colorPicker.SetActive(false);
     }

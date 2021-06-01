@@ -44,17 +44,37 @@ public class PlayerController : MonoBehaviour
         Move();
         Jump();
         PickColor();
+        OpenSettings();
     }
 
     public void Move()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        Vector2 movement = new Vector2(moveHorizontal * moveSpeed * playerSpeedModifier * Time.deltaTime, 0);
+        float moveHorizontal = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        Vector2 movement = new Vector2(moveHorizontal * playerSpeedModifier, 0);
         rb2d.AddForce(movement);
         if (rb2d.velocity.x != 0)
         {
             velMag = rb2d.velocity.magnitude;
         }
+        if (playerSpeedModifier == 1)
+        {
+            if (velMag >= 20)
+            {
+                velMag = 20;
+            }
+        }
+        else if (playerSpeedModifier == 1.5)
+        {
+            if (velMag >= 30)
+            {
+                velMag = 30;
+            }
+        }
+        else
+        {
+            Debug.Log("Invalid Speed being input");
+        }
+        //KeepUp();
     }
 
     #region Jump
@@ -84,6 +104,15 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    /*private void KeepUp()
+    {
+        if (transform.rotation.z > 0.5 || transform.rotation.z <= -0.5)
+        {
+            Debug.Log(transform.rotation);
+            transform.rotation = Quaternion.Euler(Vector3.Lerp(transform.rotation.eulerAngles,new Vector3(transform.rotation.x, transform.rotation.y, 0),4*Time.fixedDeltaTime));
+        }
+    }*/
+
     public void PickColor()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -93,6 +122,14 @@ public class PlayerController : MonoBehaviour
                 uiController.OpenColorPicker();
                 DoSlowMo();
             }
+        }
+    }
+
+    public void OpenSettings()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        {
+            uiController.OpenSettings();
         }
     }
 
@@ -110,7 +147,7 @@ public class PlayerController : MonoBehaviour
         {
             meshRen.material = playerMaterials[1];
             SetPublicSpeedModifier(1);
-            SetPublicJumpModifier(1.5f);
+            SetPublicJumpModifier(1.3f);
             SetPublicBounceModifier("normal");
         }
 
@@ -179,7 +216,7 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject collid = collision.gameObject;
-        if (collid.CompareTag("Blocks") && (velMag > 15 || velMag < -15))
+        if (collid.CompareTag("Blocks") && (velMag > 20 || velMag < -20))
         {
             Debug.Log(collid);
             if (collid.GetComponent<BlockController>().blockColor == sceneController.GetCurrentColor())

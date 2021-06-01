@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SettingsController : MonoBehaviour
 {
+    public void ResumeGame()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void RestartGame()
     {
         Debug.Log("starttest");
@@ -15,4 +20,5 @@ public class SettingsController : MonoBehaviour
     {
         Application.Quit();
     }
+
 }

@@ -35,7 +35,16 @@ public class SceneController : MonoBehaviour
         return currentColor;
     }
 
+    public void SaveToCheckpoint()
+    {
 
+    }
+
+    public void GetFromCheckpoint()
+    {
+
+    }
+    #region Add Colors
     public void AddBlue()
     {
         if (volume.profile.TryGet(out colorCurves))
@@ -66,4 +75,5 @@ public class SceneController : MonoBehaviour
             colorCurves.hueVsSat.value.AddKey(0.5f, 0f);
         }
     }
+    #endregion
 }
