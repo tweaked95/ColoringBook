@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class KillPlayer : MonoBehaviour
 {
+    public SceneController sceneController;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene(0);
+            sceneController.GetFromCheckpoint();
         }
     }
 }

@@ -12,7 +12,6 @@ public class SettingsController : MonoBehaviour
 
     public void RestartGame()
     {
-        Debug.Log("starttest");
         SceneManager.LoadScene("FirstLevel");
     }
 

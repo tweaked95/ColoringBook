@@ -5,13 +5,16 @@ using UnityEngine;
 public class UIController : MonoBehaviour
 {
     public SceneController sceneController;
+    public PlayerController playerController;
 
     GameObject colorPicker;
     GameObject settings;
+    GameObject endGameScreen;
     void Start()
     {
         colorPicker = transform.GetChild(0).gameObject;
         settings = transform.GetChild(1).gameObject;
+        endGameScreen = transform.GetChild(2).gameObject;
         colorPicker.SetActive(false);
         settings.SetActive(false);
     }
@@ -52,5 +55,17 @@ public class UIController : MonoBehaviour
     public void OpenSettings()
     {
         settings.SetActive(true);
+        playerController.DoSlowMo();
+    }
+
+    public void CloseSettings()
+    {
+        settings.SetActive(false);
+        playerController.NormalTime();
+    }
+
+    public void EndGame()
+    {
+        endGameScreen.SetActive(true);
     }
 }

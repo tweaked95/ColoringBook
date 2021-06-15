@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
         uiController.ShowButton(unlockedColor);
     }
 
-    void DoSlowMo()
+    public void DoSlowMo()
     {
         Time.timeScale = slowdownFactor;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
