@@ -11,6 +11,7 @@ public class CheckpointController : MonoBehaviour
         if (collision.transform.CompareTag("Player"))
         {
             SceneController.GetComponent<SceneController>().SaveToCheckpoint();
+            gameObject.SetActive(false);
         }
     }
 }

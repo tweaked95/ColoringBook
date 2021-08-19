@@ -16,6 +16,7 @@ public class ColorUnlocker : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("testest");
             UnlockColor();
             Destroy(gameObject);
         }

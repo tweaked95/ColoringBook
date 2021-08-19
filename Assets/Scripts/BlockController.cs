@@ -57,22 +57,26 @@ public class BlockController : MonoBehaviour
     }
 
 
-    public void SwitchToDynamic()
+    public bool SwitchToDynamic()
     {
         CheckScreenLocation();
         if (onScreen)
         {
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            return true;
         }
+        return false;
     }
 
-    public void SwitchToStatic()
+    public bool SwitchToStatic()
     {
         CheckScreenLocation();
         if (onScreen)
         {
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            return true;
         }
+        return false;
     }
 
 }

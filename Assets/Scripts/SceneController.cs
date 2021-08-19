@@ -31,6 +31,7 @@ public class SceneController : MonoBehaviour
             colorCurves.hueVsSat.value.AddKey(0.85f, 0f);
         }
         AddObjectsToList();
+        SaveToCheckpoint(); //Save checkpoint at the start of the game
     }
 
     void AddObjectsToList()
@@ -39,10 +40,10 @@ public class SceneController : MonoBehaviour
         allObjects.AddRange(GameObject.FindGameObjectsWithTag("Blocks"));
         allObjects.AddRange(GameObject.FindGameObjectsWithTag("MainCamera"));
         allObjects.Add(GameObject.FindGameObjectWithTag("Player"));
-                
+
         for (int i = 0; i < allObjects.Count; i++)
         {
-            allObjectPositions.Add(Vector3.zero);   
+            allObjectPositions.Add(Vector3.zero);
         }
     }
     public void SetCurrentColor(string color)
@@ -75,6 +76,10 @@ public class SceneController : MonoBehaviour
             }
             allObjects[i].SetActive(true);
             allObjects[i].transform.position = allObjectPositions[i];
+            if (allObjects[i].TryGetComponent(out BlockController obj))
+            {
+                obj.SwitchToStatic();
+            }
         }
         uiController.CloseSettings();
     }
@@ -97,9 +102,10 @@ public class SceneController : MonoBehaviour
     {
         if (volume.profile.TryGet(out colorCurves))
         {
-            colorCurves.hueVsSat.value.AddKey(0.5f, 0);
+            colorCurves.hueVsSat.value.AddKey(0.5f, 0.5f);
+            //colorCurves.hueVsSat.value.RemoveKey(0.5f);
             colorCurves.hueVsSat.value.AddKey(0.6f, 0.5f);
-            colorCurves.hueVsSat.value.AddKey(0.7f, 0);
+            colorCurves.hueVsSat.value.AddKey(0.7f, 0.5f);
         }
     }
 
@@ -119,8 +125,9 @@ public class SceneController : MonoBehaviour
     {
         if (volume.profile.TryGet(out colorCurves))
         {
-            colorCurves.hueVsSat.value.AddKey(0.35f, 0.5f);
-            colorCurves.hueVsSat.value.AddKey(0.5f, 0f);
+            colorCurves.hueVsSat.value.AddKey(0.25f, 0.5f);
+            colorCurves.hueVsSat.value.AddKey(0.4f, 0.5f);
+            colorCurves.hueVsSat.value.AddKey(0.6f, 0f);
         }
     }
     #endregion

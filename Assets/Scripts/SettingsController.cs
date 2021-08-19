@@ -12,7 +12,7 @@ public class SettingsController : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene("FirstLevel");
+        SceneManager.LoadScene("IntroLevel_01");
     }
 
     public void QuitGame()

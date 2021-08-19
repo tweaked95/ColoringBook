@@ -45,6 +45,70 @@ public class PlayerController : MonoBehaviour
         Jump();
         PickColor();
         OpenSettings();
+        
+    }
+
+    private void FixedUpdate()
+    {
+        JuiceUp();
+    }
+
+    float currentX = 1.0f;
+    float currentY = 1.0f;
+    private void JuiceUp()
+    {
+        //x += (target - x) * 0.1
+        if ((transform.rotation.z > 0.65f && transform.rotation.z < 0.75f) || (transform.rotation.z < -0.65f && transform.rotation.z > -0.75f))
+        {
+            if (rb2d.velocity.sqrMagnitude > 0.2f)
+            {
+                Debug.Log("Rotated : " + rb2d.velocity.sqrMagnitude);
+                if (rb2d.velocity.x >= 0.1f || rb2d.velocity.x <= -0.1f)
+                {
+                    currentY += (1.1f - currentY) * 0.1f;
+                    currentX += (0.9f - currentX) * 0.1f;
+                }
+
+                if (rb2d.velocity.y >= 0.1f || rb2d.velocity.y <= -0.1f)
+                {
+                    currentX += (1.1f - currentX) * 0.1f;
+                    currentY += (0.9f - currentY) * 0.1f;
+                }
+            }
+            else
+            {
+                currentX += (1.0f - currentX) * 0.1f;
+                currentY += (1.0f - currentY) * 0.1f;
+            }
+            
+        }
+        else
+        {
+            if (rb2d.velocity.sqrMagnitude > 0.2f)
+            {
+                if (rb2d.velocity.x >= 0.1f || rb2d.velocity.x <= -0.1f)
+                {
+                    Debug.Log("Moving Horizontally");
+                    currentX += (1.1f - currentX) * 0.2f;
+                    currentY += (0.9f - currentY) * 0.2f;
+                }
+                if (rb2d.velocity.y >= 0.5f || rb2d.velocity.y <= -0.5f)
+                {
+                    Debug.Log("Moving Vertically");
+                    currentY += (1.1f - currentY) * 0.2f;
+                    currentX += (0.9f - currentX) * 0.2f;
+                }
+            }
+            else
+            {
+                Debug.Log("Going normal");
+                currentX += (1.0f - currentX) * 0.2f;
+                currentY += (1.0f - currentY) * 0.2f;
+            }
+        }
+
+
+        meshRen.transform.localScale = new Vector3(currentX, currentY, transform.localScale.z);
     }
 
     public void Move()
@@ -52,7 +116,7 @@ public class PlayerController : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         Vector2 movement = new Vector2(moveHorizontal * playerSpeedModifier, 0);
         rb2d.AddForce(movement);
-        if (rb2d.velocity.x != 0)
+        if (rb2d.velocity.x >= 0.1 || rb2d.velocity.x <= -0.1)
         {
             velMag = rb2d.velocity.magnitude;
         }
@@ -104,14 +168,6 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    /*private void KeepUp()
-    {
-        if (transform.rotation.z > 0.5 || transform.rotation.z <= -0.5)
-        {
-            Debug.Log(transform.rotation);
-            transform.rotation = Quaternion.Euler(Vector3.Lerp(transform.rotation.eulerAngles,new Vector3(transform.rotation.x, transform.rotation.y, 0),4*Time.fixedDeltaTime));
-        }
-    }*/
 
     public void PickColor()
     {

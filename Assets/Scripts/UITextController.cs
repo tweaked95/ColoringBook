@@ -8,6 +8,7 @@ public class UITextController : MonoBehaviour
     public GameObject uiTooltipObject;
     public GameObject uiTooltipText;
 
+    [Multiline]
     public string tooltipText;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,6 +25,7 @@ public class UITextController : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             uiTooltipObject.SetActive(false);
+
         }
     }
 }
